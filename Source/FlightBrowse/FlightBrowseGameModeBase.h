@@ -7,11 +7,15 @@
 #include "FlightBrowseGameModeBase.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
-class FLIGHTBROWSE_API AFlightBrowseGameModeBase : public AGameModeBase
+class AFlightBrowserGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+	virtual void StartPlay() override;
+	void InitGameState() override;
+	//APlaneActor* plane;
+
 };
+
