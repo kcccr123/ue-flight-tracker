@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <cstring>
 #include <iostream>
 #include "sqlite/sqlite3.h"
 
@@ -7,24 +8,31 @@ using namespace std;
 class FlightLocation
 {
 private:
-    double longitude;
     double latitude;
+    double longitude;
     double altitude;
 
 public:
     FlightLocation()
     {
-        longitude, latitude, altitude = 0;
+        latitude, longitude, altitude = 0;
     }
 
-    double getLongitude()
+    FlightLocation(double latitude, double longitude, double altitude)
     {
-        return longitude;
+        this->latitude = latitude;
+        this->longitude = longitude;
+        this->altitude = altitude;
     }
 
     double getLatitude()
     {
         return latitude;
+    }
+
+    double getLongitude()
+    {
+        return longitude;
     }
 
     double getAltitude()
@@ -44,82 +52,41 @@ public:
         this->db = db;
     }
 
-    FlightLocation *getFlightLocation()
+    FlightLocation *getFlightLocation(const char *callsign)
     {
-        // should take flight id as param
-        // select long/lat/height from db
-        return new FlightLocation();
+        if (db == NULL)
+            return NULL;
+
+        // char sql[100] = "SELECT lat, lng, atd from flight_data where callsign=";
+        char sql[100] = "SELECT lat, lng, atd from flight_data where `index`=";
+        strcat(sql, callsign);
+
+        sqlite3_stmt *stmt;
+        sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+        sqlite3_step(stmt);
+
+        double latitude = sqlite3_column_double(stmt, 0);
+        double longitude = sqlite3_column_double(stmt, 1);
+        double altitude = sqlite3_column_double(stmt, 2);
+        
+        sqlite3_finalize(stmt);
+
+        return new FlightLocation(latitude, longitude, altitude);
     }
 };
 
-static int callback(void *data, int argc, char **argv, char **azColName){
-   int i;
-   fprintf(stderr, "%s: ", (const char*)data);
-   
-   for(i = 0; i<argc; i++){
-      printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-   }
-   
-   printf("\n");
-   return 0;
-}
-
-int main(int argc, char* argv[]) {
-   sqlite3 *db;
-   char *zErrMsg = 0;
-   int rc;
-   char *sql;
-   const char* data = "Callback function called";
-
-   /* Open database */
-   rc = sqlite3_open("test.db", &db);
-   
-   if( rc ) {
-      fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
-      return(0);
-   } else {
-      fprintf(stderr, "Opened database successfully\n");
-   }
-
-   /* Create SQL statement */
-   sql = "SELECT * from flight_data";
-
-   /* Execute SQL statement */
-   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
-   
-   if( rc != SQLITE_OK ) {
-      fprintf(stderr, "SQL error: %s\n", zErrMsg);
-      sqlite3_free(zErrMsg);
-   } else {
-      fprintf(stdout, "Operation done successfully\n");
-   }
-   sqlite3_close(db);
-   return 0;
-}
-
-/*
 int main(int argc, char *argv[])
 {
-    sqlite3*        db;
-    sqlite3_stmt*   stmt;
-    const char*     query = "SELECT * FROM flight_data WHERE index=1499\0";
-    int             rc;
+    sqlite3 *db;
 
-    rc = sqlite3_open("test.db", &db);
-    if (rc != SQLITE_OK) return 1;
+    if (sqlite3_open("test.db", &db) != SQLITE_OK)
+        return 1;
 
-    printf("%d\n", sqlite3_prepare_v2(db, query, sizeof(query), &stmt, NULL));
+    SQLiteConverter *converter = new SQLiteConverter(db);
+    FlightLocation *location = converter->getFlightLocation("1499");
 
-    rc = sqlite3_finalize(stmt);
-    if (rc != SQLITE_OK) return 4; // Error in finalize
-
-    // SQLiteConverter* converter = new SQLiteConverter(db);
-    // FlightLocation* location = converter->getFlightLocation();
-
-    rc = sqlite3_close(db);
-    if (rc != SQLITE_OK)
-        return 5; // Error in close
+    printf("%lf, %lf, %lf\n", location->getLatitude(), location->getLongitude(), location->getAltitude());
+    sqlite3_close(db);
 
     return 0;
 }
-*/
