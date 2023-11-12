@@ -1,15 +1,11 @@
-#include <stdio.h>
 #include <cstring>
-#include <iostream>
 #include "sqlite/sqlite3.h"
 #include "db_to_frontend.h"
 
-using namespace std;
 
 /*
 * SQlite converter methods
 */
-
 SQLiteConverter::SQLiteConverter(sqlite3* db)
 {
 	this->db = db;
@@ -22,7 +18,7 @@ FlightLocation* SQLiteConverter::getFlightLocation(const char* callsign)
 
 	// char sql[100] = "SELECT lat, lng, atd from flight_data where callsign=";
 	char sql[100] = "SELECT lat, lng, atd from flight_data where `index`=";
-	strcat(sql, callsign);
+	strcat_s(sql, callsign);
 
 	sqlite3_stmt* stmt;
 	sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);

@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Delegates/DelegateCombinations.h"
 #include "MenuPlayerController.h"
+#include "../api/db_to_frontend.h"
+#include "../api/sqlite/sqlite3.h"
 #include "viewModelCesium.generated.h"
 
 
@@ -22,7 +24,9 @@ class UViewModelCesium : public UObject
 
 	//Using raw pointer because UnrealEngine has ownership over set playerController.
 	AMenuPlayerController* worldInstance;
-
+private:
+	sqlite3 * db;
+	SQLiteConverter * converter;
 public:
 	FCordsDelegate viewCords;
 	//FPlayerCords playerCords;

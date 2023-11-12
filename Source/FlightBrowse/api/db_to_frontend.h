@@ -1,10 +1,7 @@
-#include <stdio.h>
-#include <cstring>
-#include <iostream>
+#pragma once
+
 #include "sqlite/sqlite3.h"
 
-
-using namespace std;
 
 class FlightLocation
 {

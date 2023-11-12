@@ -24,7 +24,6 @@ void AFlightBrowseGameModeBase::StartPlay()
 void AFlightBrowseGameModeBase::InitGameState()
 {
     Super::InitGameState();
-    //ViewModelInstance = MakeShared<UViewModelCesium>();
     UE_LOG(LogTemp, Log, TEXT("GameMode Runs"));
     DefaultPawnClass = AMyGlobeAwareDefaultPawn::StaticClass();
     PlayerControllerClass = AMenuPlayerController::StaticClass();
