@@ -17,10 +17,7 @@ flight_tracker = fr_api.get_flight_tracker_config()
 fr_api.set_flight_tracker_config(flight_tracker)
 
 
-
 def get_data():
-
-
     #flight radar dataframe, reset it to empty
     df = pd.DataFrame(columns=['origin', 'destination', 'callsign', 'lat', 'lng', 'atd']) 
 
@@ -29,7 +26,7 @@ def get_data():
     for flight in flights:
         df.loc[len(df.index)] = [flight.origin_airport_iata,
                             flight.destination_airport_iata,
-                            flight.aircraft_code,
+                            flight.callsign,
                             flight.latitude,
                             flight.longitude,
                             flight.altitude]
