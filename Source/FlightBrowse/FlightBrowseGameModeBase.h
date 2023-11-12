@@ -10,12 +10,11 @@
  *
  */
 UCLASS()
-class AFlightBrowserGameModeBase : public AGameModeBase
+class AFlightBrowseGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	virtual void StartPlay() override;
 	void InitGameState() override;
-	//APlaneActor* plane;
 
 };
 
