@@ -6,32 +6,26 @@
 #include "MenuPlayerController.h"
 #include "SSSlateUI.h"
 #include "CesiumGeoreference.h"
-#include "GlobeAwareDefaultPawn.h"
+#include "MyGlobeAwareDefaultPawn.h"
 #include "viewModelCesium.h"
+#include "api/db_to_frontend.h"
+#include "api/sqlite/sqlite3.h"
 #include "Engine/Engine.h"
 
-void AFlightBrowserGameModeBase::StartPlay()
+void AFlightBrowseGameModeBase::StartPlay()
 {
     Super::StartPlay();
     check(GEngine != nullptr);
     GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Running"));
     UE_LOG(LogTemp, Log, TEXT("GameMode Runs"));
-    //AMenuPlayerController* PlayerController = GetWorld()->SpawnActor<AMenuPlayerController>(AMenuPlayerController::StaticClass());
-    //AMyHUD* MyHUD = GetWorld()->SpawnActor<AMyHUD>(AMyHUD::StaticClass());
-    //plane = GetWorld()->SpawnActor<APlaneActor>(APlaneActor::StaticClass());
-    //AMenuPlayerController* temp = Cast<AMenuPlayerController>(PlayerControllerClass);
-    //temp->setPlane(plane);
+
 }
 
-void AFlightBrowserGameModeBase::InitGameState()
+void AFlightBrowseGameModeBase::InitGameState()
 {
     Super::InitGameState();
-    //ViewModelInstance = MakeShared<UViewModelCesium>();
-    DefaultPawnClass = AGlobeAwareDefaultPawn::StaticClass();
+    UE_LOG(LogTemp, Log, TEXT("GameMode Runs"));
+    DefaultPawnClass = AMyGlobeAwareDefaultPawn::StaticClass();
     PlayerControllerClass = AMenuPlayerController::StaticClass();
     HUDClass = AMyHUD::StaticClass();
-    // HUDClass->setViewModel(ViewModelInstance);
-    // AMenuPlayerController* temp = Cast<AMenuPlayerController>(PlayerControllerClass);
-    // temp->TeleportPlayer(5, 5, 5);
-
 }

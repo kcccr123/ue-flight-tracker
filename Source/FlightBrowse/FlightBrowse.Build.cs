@@ -14,6 +14,8 @@ public class FlightBrowse : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(new string[] { "CesiumRuntime" });
 
+        bEnableUndefinedIdentifierWarnings = false;
+
         // Uncomment if you are using Slate UI
         // PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 
