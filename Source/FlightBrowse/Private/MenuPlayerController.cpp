@@ -2,8 +2,8 @@
 
 #include "CesiumGeoreference.h"
 #include "MenuPlayerController.h"
-#include "GlobeAwareDefaultPawn.h"
-//#include "PlaneActor.h"
+#include "MyGlobeAwareDefaultPawn.h"
+#include "PlaneActor.h"
 #include "MyHUD.h"
 
 AMenuPlayerController::AMenuPlayerController()
@@ -18,8 +18,8 @@ void AMenuPlayerController::BeginPlay()
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Log, TEXT("Player controller begin play"));
 	CesiumGeoreference = ACesiumGeoreference::GetDefaultGeoreference(GetWorld());
-	player = Cast<AGlobeAwareDefaultPawn>(GetPawn());
-	//plane = GetWorld()->SpawnActor<APlaneActor>(APlaneActor::StaticClass());
+	player = Cast<AMyGlobeAwareDefaultPawn>(GetPawn());
+	plane = GetWorld()->SpawnActor<APlaneActor>(APlaneActor::StaticClass());
 
 }
 
@@ -39,21 +39,16 @@ void AMenuPlayerController::TeleportPlayer(float longta, float lata, float alta)
 	UE_LOG(LogTemp, Log, TEXT("%f player"), lata);
 	UE_LOG(LogTemp, Log, TEXT("%f player"), alta);
 
-	//Convert
-	//glm::dvec3 temp = glm::dvec3(longta, lata, 2250 + alta);
 
 	// Set player position
 	player->FlyToLocationLongitudeLatitudeHeight(FVector(longta, lata, 2250 + alta), 0, 0, false);
+
+	// Set plane position
 	FVector temp2 = CesiumGeoreference->TransformLongitudeLatitudeHeightPositionToUnreal(FVector(longta, lata, 2250 + alta));
-	//plane->SetActorLocation(temp2);
+	plane->SetActorLocation(temp2);
 
 }
-/*
-void AMenuPlayerController::setPlane(APlaneActor* input)
-{
-	plane = input;
-}
-*/
+
 
 void AMenuPlayerController::OpenMenu()
 {

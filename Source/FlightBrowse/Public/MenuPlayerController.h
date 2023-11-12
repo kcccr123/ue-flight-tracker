@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "CesiumGeoreference.h"
-#include "GlobeAwareDefaultPawn.h"
-//#include "PlaneActor.h"
+#include "MyGlobeAwareDefaultPawn.h"
+#include "PlaneActor.h"
 #include "MenuPlayerController.generated.h"
 
 
@@ -21,13 +21,13 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	void OpenMenu();
-	AGlobeAwareDefaultPawn* player;
-	//APlaneActor* plane;
+	AMyGlobeAwareDefaultPawn* player;
+	APlaneActor* plane;
 	ACesiumGeoreference* CesiumGeoreference;
+	class UCesiumFlyToComponent* FlyToComponent;
 
 
 public:
 	void TeleportPlayer(float longta, float lata, float alta);
-	//void setPlane(APlaneActor*);
 
 };
