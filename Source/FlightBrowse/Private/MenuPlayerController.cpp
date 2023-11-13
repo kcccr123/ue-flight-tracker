@@ -9,8 +9,6 @@
 AMenuPlayerController::AMenuPlayerController()
 {
 	UE_LOG(LogTemp, Log, TEXT("Player controller constructor"));
-	//CesiumGeoreference = CreateDefaultSubobject<ACesiumGeoreference>(TEXT("CesiumGeoreference"));
-	//CesiumGeoreference = CesiumGeoreference->GetDefaultGeoreference(GetWorld());
 }
 
 void AMenuPlayerController::BeginPlay()
