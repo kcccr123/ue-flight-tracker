@@ -2,25 +2,27 @@
 
 #include "sqlite/sqlite3.h"
 
-
-class FlightLocation
+class Flight
 {
 private:
+    const char* callsign;
+    const unsigned char* airline;
     double latitude;
     double longitude;
     double altitude;
+    int heading;
 
 public:
-    FlightLocation();
-
-    FlightLocation(double latitude, double longitude, double altitude);
+    Flight();
+    Flight(const char* callsign, const unsigned char* airline, double latitude, double longitude, double altitude, int heading);
+    
+    const char* getCallsign();
+    const unsigned char* getAirline();
     double getLatitude();
     double getLongitude();
     double getAltitude();
+    int getHeading();
 };
-
-
-
 
 class SQLiteConverter
 {
@@ -30,10 +32,8 @@ private:
 public:
     SQLiteConverter(sqlite3* db);
 
-    FlightLocation* getFlightLocation(const char* callsign);
+    Flight* getFlight(const char* callsign);
 };
-
-
 
 /* Usage example
 int main(int argc, char *argv[])
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         return 1;
 
     SQLiteConverter *converter = new SQLiteConverter(db);
-    FlightLocation *location = converter->getFlightLocation("1499");
+    Flight *location = converter->getFlight("1499");
 
     printf("%lf, %lf, %lf\n", location->getLatitude(), location->getLongitude(), location->getAltitude());
     sqlite3_close(db);

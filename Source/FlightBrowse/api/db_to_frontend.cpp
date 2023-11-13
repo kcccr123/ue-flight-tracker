@@ -2,7 +2,6 @@
 #include "sqlite/sqlite3.h"
 #include "db_to_frontend.h"
 
-
 /*
 * SQlite converter methods
 */
@@ -11,61 +10,74 @@ SQLiteConverter::SQLiteConverter(sqlite3* db)
 	this->db = db;
 }
 
-FlightLocation* SQLiteConverter::getFlightLocation(const char* callsign)
+Flight* SQLiteConverter::getFlight(const char* callsign)
 {
-	if (this->db == NULL)
-		return NULL;
-
-	// char sql[100] = "SELECT lat, lng, atd from flight_data where callsign=";
-	char sql[100] = "SELECT lat, lng, atd from flight_data where `index`=";
+	char sql[100] = "SELECT airline, lat, lng, atd, heading from flight_data where callsign=";
 	strcat_s(sql, callsign);
 
 	sqlite3_stmt* stmt;
 	sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	sqlite3_step(stmt);
 
-	double latitude = sqlite3_column_double(stmt, 0);
-	double longitude = sqlite3_column_double(stmt, 1);
-	double altitude = sqlite3_column_double(stmt, 2);
+	const unsigned char* airline = sqlite3_column_text(stmt, 0);
+	double latitude = sqlite3_column_double(stmt, 1);
+	double longitude = sqlite3_column_double(stmt, 2);
+	double altitude = sqlite3_column_double(stmt, 3);
+	int heading = sqlite3_column_int(stmt, 4);
 
 	sqlite3_finalize(stmt);
 
-	return new FlightLocation(latitude, longitude, altitude);
+	return new Flight(callsign, airline, latitude, longitude, altitude, heading);
 }
-
-
-
 
 /*
 * Flight location class methods
 */
-FlightLocation::FlightLocation()
+Flight::Flight()
 {
-	this->latitude, this->longitude, this->altitude = 0;
+	this->callsign = "";
+	this->latitude, this->longitude, this->altitude, this->heading = 0;
 }
 
-FlightLocation::FlightLocation(double latitude, double longitude, double altitude)
+Flight::Flight(const char* callsign, const unsigned char* airline, double latitude, double longitude, double altitude, int heading)
 {
+	this->callsign = callsign;
+	this->airline = airline;
 	this->latitude = latitude;
 	this->longitude = longitude;
 	this->altitude = altitude;
+	this->heading = heading;
 }
 
-double FlightLocation::getLatitude()
+const char* Flight::getCallsign()
+{
+	return this->callsign;
+}
+
+const unsigned char* Flight::getAirline()
+{
+	return this->airline;
+}
+
+double Flight::getLatitude()
 {
 	return this->latitude;
 }
 
-double FlightLocation::getLongitude()
+double Flight::getLongitude()
 {
 	return this->longitude;
 }
 
-double FlightLocation::getAltitude()
+double Flight::getAltitude()
 {
 	return this->altitude;
 }
 
+int Flight::getHeading()
+{
+	return this->heading;
+}
 
 /* Usage example
 int main(int argc, char *argv[])
@@ -76,7 +88,7 @@ int main(int argc, char *argv[])
 		return 1;
 
 	SQLiteConverter *converter = new SQLiteConverter(db);
-	FlightLocation *location = converter->getFlightLocation("1499");
+	Flight *location = converter->getFlight("1499");
 
 	printf("%lf, %lf, %lf\n", location->getLatitude(), location->getLongitude(), location->getAltitude());
 	sqlite3_close(db);
