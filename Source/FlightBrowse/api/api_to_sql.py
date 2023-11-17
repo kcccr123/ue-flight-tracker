@@ -1,15 +1,20 @@
 import pandas as pd
-import sqlite3
 from sqlalchemy import create_engine
 from FlightRadar24 import FlightRadar24API
 import schedule
 import time
 
 
-#sqlite setup
+#sql setup
+USER = 'test'
+PASSWORD = 'test'
+HOST = 'localhost'
+PORT = '3306'
+DATABASE = 'flight_data'
 
-cnx = sqlite3.connect('test.db')
-e = create_engine('sqlite://')
+cnx = create_engine(
+      f"mysql+mysqlconnector://{USER}:{PASSWORD}@{HOST}/{DATABASE}", 
+      connect_args= dict(host=HOST, port=PORT))
 
 #flight radar config
 fr_api = FlightRadar24API()
@@ -37,7 +42,7 @@ def get_data():
                             flight.heading]
         
     print(df.iloc[25])
-    df.to_sql(name='flight_data', con=cnx, if_exists='replace')
+    df.to_sql(name='flight_data', con=cnx, if_exists='replace', index=False)
         
 schedule.every(30).seconds.do(get_data)
 
