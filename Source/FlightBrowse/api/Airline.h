@@ -3,10 +3,13 @@
 class Airline
 {
 private:
-    Flight** flights;
+    TArray<Flight*> flights;
+    const char* icao;
 
 public:
-    Airline();
+    Airline(const char* icao);
 
-    Flight** getFlights();
+    int addFlight(Flight *flight); 
+
+    TArray<Flight*> getFlights();
 };

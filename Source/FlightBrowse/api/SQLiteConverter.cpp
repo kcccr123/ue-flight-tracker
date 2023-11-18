@@ -3,23 +3,23 @@
 #include "Flight.h"
 #include "Airline.h"
 /*
-* SQlite converter methods
-*/
-SQLiteConverter::SQLiteConverter(sqlite3* db)
+ * SQlite converter methods
+ */
+SQLiteConverter::SQLiteConverter(sqlite3 *db)
 {
 	this->db = db;
 }
 
-Flight* SQLiteConverter::getFlight(const char* callsign)
+Flight *SQLiteConverter::getFlight(const char *callsign)
 {
 	char sql[100] = "SELECT airline, lat, lng, atd, heading from flight_data where callsign=";
 	strcat_s(sql, callsign);
 
-	sqlite3_stmt* stmt;
+	sqlite3_stmt *stmt;
 	sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
 	sqlite3_step(stmt);
 
-	const unsigned char* airline = sqlite3_column_text(stmt, 0);
+	const unsigned char *airline = sqlite3_column_text(stmt, 0);
 	double latitude = sqlite3_column_double(stmt, 1);
 	double longitude = sqlite3_column_double(stmt, 2);
 	double altitude = sqlite3_column_double(stmt, 3);
@@ -30,9 +30,31 @@ Flight* SQLiteConverter::getFlight(const char* callsign)
 	return new Flight(callsign, airline, latitude, longitude, altitude, heading);
 }
 
-Airline* SQLiteConverter::buildAirline(const unsigned char* icao)
+Airline *SQLiteConverter::buildAirline(const unsigned char *icao)
 {
+	Airline *company = new Airline(icao);
 
+	char sql[100] = "SELECT callsign, lat, lng, atd, heading from flight_data where airline=";
+	strcat_s(sql, icao);
+
+	sqlite3_stmt *stmt;
+	sqlite3_prepare_v2(db, sql, -1, &stmt, nullptr);
+	sqlite3_step(stmt);
+
+	while ((rc = sqlite3_step(stmt)) == SQLITE_ROW)
+	{
+		const char *callsign = sqlite3_column_text(stmt, 0);
+		double latitude = sqlite3_column_double(stmt, 2);
+		double longitude = sqlite3_column_double(stmt, 3);
+		double altitude = sqlite3_column_double(stmt, 4);
+		int heading = sqlite3_column_int(stmt, 5);
+
+		company->addFlight(new Flight(callsign, icao, latitude, longitude, altitude, heading));
+	}
+	
+	sqlite3_finalize(stmt);
+
+	return company;
 }
 
 /* Usage example
