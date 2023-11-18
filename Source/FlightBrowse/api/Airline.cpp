@@ -3,10 +3,10 @@
 
 Airline::Airline() 
 {
-
+    this->flights = nullptr;
 };
 
 Flight** Airline::getFlights()
 {
-
+    return this->flights;
 };
