@@ -1,15 +1,18 @@
+#pragma once
+
+#include "CoreMinimal.h"
 #include "Flight.h"
 
 class Airline
 {
 private:
-    TArray<Flight*> flights;
-    const char* icao;
+    TArray<TSharedPtr<Flight>> flights;
+    FString icao;
 
 public:
-    Airline(const char* icao);
+    Airline(FString icao);
 
-    int addFlight(Flight *flight); 
+    int addFlight(TSharedPtr<Flight> flight);
 
-    TArray<Flight*> getFlights();
+    TArray<TSharedPtr<Flight>> getFlights();
 };

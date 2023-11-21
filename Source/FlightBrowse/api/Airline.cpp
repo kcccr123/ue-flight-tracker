@@ -1,27 +1,20 @@
 #include "Airline.h"
 #include "Flight.h"
 
-Airline::Airline(const char* icao)
+Airline::Airline(FString icao)
 {
     this->icao = icao;
-    this->flights = nullptr;
+    this->flights.Init(0, 0);
 };
 
-int Airline::addFlight(Flight *flight)
+int Airline::addFlight(TSharedPtr<Flight> flight)
 {
-    try
-    {
-        this->flights.Emplace(flight);
-        return 0;
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-        return 1;
-    }
+     this->flights.Emplace(flight);
+     return 0;
+
 }
 
-TArray<Flight*> Airline::getFlights()
+TArray<TSharedPtr<Flight>> Airline::getFlights()
 {
     return this->flights;
 };

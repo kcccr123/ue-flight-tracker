@@ -1,21 +1,23 @@
+#pragma once
+
 class Flight
 {
 private:
-    const char* callsign;
-    const unsigned char* airline;
+    FString callsign;
+    FString airline;
     double latitude;
     double longitude;
     double altitude;
-    int heading;
+    int32 heading;
 
 public:
     Flight();
-    Flight(const char* callsign, const unsigned char* airline, double latitude, double longitude, double altitude, int heading);
+    Flight(FString callsign, FString airline, double latitude, double longitude, double altitude, int32 heading);
     
-    const char* getCallsign();
-    const unsigned char* getAirline();
+    FString getCallsign();
+    FString getAirline();
     double getLatitude();
     double getLongitude();
     double getAltitude();
-    int getHeading();
+    int32 getHeading();
 };

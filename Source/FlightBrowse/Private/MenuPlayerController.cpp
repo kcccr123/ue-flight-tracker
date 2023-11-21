@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "CesiumGeoreference.h"
+
 #include "MenuPlayerController.h"
 #include "MyGlobeAwareDefaultPawn.h"
 #include "PlaneActor.h"
@@ -43,7 +44,10 @@ void AMenuPlayerController::TeleportPlayer(float longta, float lata, float alta)
 
 	// Set plane position
 	FVector temp2 = CesiumGeoreference->TransformLongitudeLatitudeHeightPositionToUnreal(FVector(longta, lata, 2250 + alta));
+
 	plane->SetActorLocation(temp2);
+	// Apply the new rotation to the model
+
 
 }
 

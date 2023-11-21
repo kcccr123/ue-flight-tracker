@@ -6,7 +6,7 @@ Flight::Flight()
     this->latitude, this->longitude, this->altitude, this->heading = 0;
 }
 
-Flight::Flight(const char *callsign, const unsigned char *airline, double latitude, double longitude, double altitude, int heading)
+Flight::Flight(FString callsign, FString airline, double latitude, double longitude, double altitude, int32 heading)
 {
     this->callsign = callsign;
     this->airline = airline;
@@ -16,12 +16,12 @@ Flight::Flight(const char *callsign, const unsigned char *airline, double latitu
     this->heading = heading;
 };
 
-const char *Flight::getCallsign()
+FString Flight::getCallsign()
 {
     return this->callsign;
 };
 
-const unsigned char *Flight::getAirline()
+FString Flight::getAirline()
 {
     return this->airline;
 };
@@ -41,7 +41,7 @@ double Flight::getAltitude()
     return this->altitude;
 };
 
-int Flight::getHeading()
+int32 Flight::getHeading()
 {
     return this->heading;
 };

@@ -1,18 +1,17 @@
 #pragma once
 
-#include "sqlite/sqlite3.h"
 #include "Flight.h"
 #include "Airline.h"
 
 class SQLiteConverter
 {
 private:
-    sqlite3 *db;
+    FString dbName;
 
 public:
-    SQLiteConverter(sqlite3* db);
+    SQLiteConverter(FString db);
 
-    Flight* getFlight(const char* callsign);
+    Flight* getFlight(FString callsign);
 
-    Airline* buildAirline(const unsigned char* icao);
+    Airline* buildAirline(FString icao);
 };
