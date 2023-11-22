@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Widgets/Views/SListView.h"
 #include "UIHeader/SFlightListView.h"
+#include "Widgets/Views/SListView.h"
 #include "UIHeader/SAirlineButton.h"
 #include "Widgets/Input/SEditableTextBox.h"
 #include "SlateOptMacros.h"

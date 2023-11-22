@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "CesiumGeoreference.h"
 
 #include "MenuPlayerController.h"
+#include "CesiumGeoreference.h"
+#include "CesiumGeoreference.h"
 #include "MyGlobeAwareDefaultPawn.h"
-#include "PlaneActor.h"
 #include "MyHUD.h"
+#include "PlaneActor.h"
 
 AMenuPlayerController::AMenuPlayerController()
 {
@@ -45,10 +46,10 @@ void AMenuPlayerController::TeleportPlayer(double longta, double lata, double al
 	plane->SetActorRotation(AircraftRotation);
 
 	// Set player position
-	player->FlyToLocationLongitudeLatitudeHeight(FVector(longta, lata, 1050 + alta), 0, 0, false);
+	player->FlyToLocationLongitudeLatitudeHeight(FVector(longta, lata, 2050 + alta), 0, 0, false);
 
 	// Set plane position
-	FVector temp2 = CesiumGeoreference->TransformLongitudeLatitudeHeightPositionToUnreal(FVector(longta, lata, 1000 + alta));
+	FVector temp2 = CesiumGeoreference->TransformLongitudeLatitudeHeightPositionToUnreal(FVector(longta, lata, 2000 + alta));
 	plane->SetActorLocation(temp2);
 
 }
