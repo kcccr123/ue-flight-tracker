@@ -17,6 +17,8 @@ class AMyHUD : public AHUD
 	virtual void BeginPlay() override;
 	UViewModelCesium* ViewModelInstance;
 protected:
+	TSharedPtr<class SSlateUI> SearchMenu;
+	TSharedPtr<class SFlightListView> ListMenu;
 	TSharedPtr<class SSlateUI> MenuWidget;
 	TSharedPtr<class SWidget> MenuContainer;
 
@@ -25,4 +27,5 @@ public:
 	bool isOpen;
 	void ShowMenu();
 	void CloseMenu();
+	void OpenList(const char *);
 };
