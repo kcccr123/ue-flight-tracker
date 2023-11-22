@@ -28,6 +28,6 @@ protected:
 
 
 public:
-	void TeleportPlayer(float longta, float lata, float alta);
+	void TeleportPlayer(double longta, double lata, double alta, int32 heading);
 
 };

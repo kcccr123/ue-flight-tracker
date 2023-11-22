@@ -2,10 +2,13 @@
 
 
 #include "MyHUD.h"
-#include "SSSlateUI.h"
+#include "UIHeader/SSSlateUI.h"
+#include "UIHeader/SFlightListView.h"
 #include "Engine/Engine.h"
 #include "viewModelCesium.h"
 #include "Widgets/SWeakWidget.h"
+#include "../api/Flight.h"
+#include "../api/Airline.h"
 #include "GameFramework/PlayerController.h"
 
 
@@ -22,6 +25,8 @@ void AMyHUD::BeginPlay() {
     ViewModelInstance = NewObject<UViewModelCesium>();
     ViewModelInstance->setWorldInstance(Cast<AMenuPlayerController>(GetWorld()->GetFirstPlayerController()));
 
+    SearchMenu = SNew(SSlateUI).HUDPtr(this).instance(ViewModelInstance);
+    ListMenu = SNew(SFlightListView).HUDPtr(this).instance(ViewModelInstance);
 }
 
 
@@ -29,8 +34,7 @@ void AMyHUD::ShowMenu()
 {
     if (GEngine && GEngine->GameViewport) {
         //pass referance to ViewModelInstance from here
-        MenuWidget = SNew(SSlateUI).HUDPtr(this).instance(ViewModelInstance);
-        GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(MenuContainer, SWeakWidget).PossiblyNullContent(MenuWidget.ToSharedRef()));
+        GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(MenuContainer, SWeakWidget).PossiblyNullContent(SearchMenu.ToSharedRef()));
         isOpen = true;
         if (PlayerOwner) {
             PlayerOwner->bShowMouseCursor = true;
@@ -50,5 +54,19 @@ void AMyHUD::CloseMenu()
         }
     }
 
+}
+
+void AMyHUD::OpenList(const char * AirlineCode)
+{
+
+    // GET TARRAY FROM VIEWMODEL
+    Airline * resultAirline = ViewModelInstance->GetFlights(AirlineCode);
+    
+    // SET TARRAY 
+    ListMenu->FlightsListing = resultAirline->getFlights();
+    UE_LOG(LogTemp, Log, TEXT("Array Length: %d"), ListMenu->FlightsListing.Num());
+
+    GEngine->GameViewport->RemoveViewportWidgetContent(MenuContainer.ToSharedRef());
+    GEngine->GameViewport->AddViewportWidgetContent(SAssignNew(MenuContainer, SWeakWidget).PossiblyNullContent(ListMenu.ToSharedRef()));
 }
 

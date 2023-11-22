@@ -4,12 +4,11 @@
 #include "FlightBrowseGameModeBase.h"
 #include "MyHUD.h"
 #include "MenuPlayerController.h"
-#include "SSSlateUI.h"
 #include "CesiumGeoreference.h"
 #include "MyGlobeAwareDefaultPawn.h"
 #include "viewModelCesium.h"
-#include "api/db_to_frontend.h"
-#include "api/sqlite/sqlite3.h"
+#include "api/SQLiteConverter.h"
+#include "api/Airline.h"
 #include "Engine/Engine.h"
 
 void AFlightBrowseGameModeBase::StartPlay()
@@ -18,7 +17,6 @@ void AFlightBrowseGameModeBase::StartPlay()
     check(GEngine != nullptr);
     GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Running"));
     UE_LOG(LogTemp, Log, TEXT("GameMode Runs"));
-
 }
 
 void AFlightBrowseGameModeBase::InitGameState()
@@ -28,4 +26,5 @@ void AFlightBrowseGameModeBase::InitGameState()
     DefaultPawnClass = AMyGlobeAwareDefaultPawn::StaticClass();
     PlayerControllerClass = AMenuPlayerController::StaticClass();
     HUDClass = AMyHUD::StaticClass();
+
 }
