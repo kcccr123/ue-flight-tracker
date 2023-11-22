@@ -3,6 +3,7 @@
 #pragma once
 #include "viewModelCesium.h"
 #include "CoreMinimal.h"
+#include "MyHUD.h"
 #include "Widgets/SCompoundWidget.h"
 
 /**
@@ -27,10 +28,10 @@ protected:
 	//Factory Class
 	TWeakObjectPtr<class AMyHUD> HUDPtr;
 
-	
-
+	// Table Row Generator 
 	TSharedRef<ITableRow> GenerateRow(TSharedPtr<Flight> Item, const TSharedRef<STableViewBase>& OwnerTable);
-	FReply getValues(double lata, double longta, double alta);
+
+	FReply getValues(double lata, double longta, double alta, int32 heading);
 
 	virtual bool SupportsKeyboardFocus() const override { return true; };
 };

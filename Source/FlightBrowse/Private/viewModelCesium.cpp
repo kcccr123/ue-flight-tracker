@@ -27,12 +27,12 @@ Airline * UViewModelCesium::GetFlights(FString airline)
 }
 
 
-void UViewModelCesium::HandleIntInput(float longitude, float latitude, float altitude)
+void UViewModelCesium::HandleIntInput(double longitude, double latitude, double altitude, int32 heading)
 {
 	UE_LOG(LogTemp, Log, TEXT("%f"), longitude);
 	UE_LOG(LogTemp, Log, TEXT("%f"), latitude);
 	UE_LOG(LogTemp, Log, TEXT("%f"), altitude);
-	worldInstance->TeleportPlayer(longitude, latitude, altitude);
+	worldInstance->TeleportPlayer(longitude, latitude, altitude, heading);
 
 
 }

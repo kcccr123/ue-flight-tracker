@@ -21,12 +21,6 @@ void SFlightListView::Construct(const FArguments& InArgs)
 	//Referanace to Controller
 	ViewModelInstance = InArgs._instance;
 
-	/*
-	for (int32 i = 0; i < 10; ++i)
-	{
-		FlightsListing.Add(MakeShared<int32>(i));
-	}*/
-
 	ChildSlot
 	[
 		SNew(SOverlay)
@@ -56,9 +50,10 @@ void SFlightListView::Construct(const FArguments& InArgs)
 }
 
 
-FReply SFlightListView::getValues(double lata, double longta, double alta)
+FReply SFlightListView::getValues(double lata, double longta, double alta, int32 heading)
 {
-	ViewModelInstance->viewCords.ExecuteIfBound(longta, lata, alta);
+	ViewModelInstance->viewCords.ExecuteIfBound(longta, lata, alta, heading);
+	HUDPtr->CloseMenu();
 	return FReply::Handled();
 }
 
@@ -72,7 +67,7 @@ TSharedRef<ITableRow> SFlightListView::GenerateRow(TSharedPtr<Flight> Item, cons
 	return SNew(STableRow<TSharedPtr<Flight>>, OwnerTable)
 		[
 				SNew(SButton)
-				.OnClicked_Lambda([this, Item] { return getValues(Item->getLatitude(), Item->getLongitude(), Item->getAltitude()); })
+				.OnClicked_Lambda([this, Item] { return getValues(Item->getLatitude(), Item->getLongitude(), Item->getAltitude(), Item->getHeading()); })
 				.ContentPadding(40)
 				.Content()
 				[

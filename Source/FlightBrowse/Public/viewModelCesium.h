@@ -10,8 +10,7 @@
 #include "viewModelCesium.generated.h"
 
 
-DECLARE_DELEGATE_ThreeParams(FCordsDelegate, float, float, float);
-//DECLARE_DELEGATE_ThreeParams(FPlayerCords, int32, int32, int32);
+DECLARE_DELEGATE_FourParams(FCordsDelegate, double, double, double, int32);
 /**
  *
  */
@@ -30,7 +29,7 @@ private:
 public:
 	FCordsDelegate viewCords;
 	//FPlayerCords playerCords;
-	void HandleIntInput(float longitude, float latitude, float altitude);
+	void HandleIntInput(double longitude, double latitude, double altitude, int32 heading);
 	void setWorldInstance(AMenuPlayerController* worldPtr);
 	Airline * GetFlights(FString Airline);
 

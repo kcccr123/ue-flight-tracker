@@ -15,22 +15,33 @@ void SSlateUI::Construct(const FArguments& InArgs)
 
 	bCanSupportFocus = true;
 
+	//Referance to HUD
 	HUDPtr = InArgs._HUDPtr;
-
-	//Margins
-	const FMargin ContentPadding = FMargin(300.f, 200.f);
-	const FMargin ButtonPadding = FMargin(10.f);
-
-	//Text constants
-	const FText Longtitude = LOCTEXT("Long", "Longtitude");
-	const FText Latititude = LOCTEXT("Lat", "Laititude");
-	const FText Altitude = LOCTEXT("Alt", "Altitude");
-	const FText Start = LOCTEXT("Start", "Start");
-	const FText ListViewText = LOCTEXT("Enter", "Enter");
-	const FText EnterAirline = LOCTEXT("IACO", "IACO");
 
 	//Referanace to Controller
 	ViewModelInstance = InArgs._instance;
+
+	// View Margin
+	const FMargin ContentPadding = FMargin(300.f, 200.f);
+
+	// Upper Box Margins
+	const FMargin TeleportPadding = FMargin(200.f, 50.f);
+	const FMargin ButtonPaddingInner = FMargin(10.f, 10.f);
+	const FMargin ButtonPadding2 = FMargin(10.f, 10.f);
+
+	// Lower Box Margins
+	const FMargin ListPadding = FMargin(200.f, 50.f);
+	const FMargin ButtonPadding = FMargin(300.f, 10.f);
+
+	// Text constants Upper Box
+	const FText Longtitude = LOCTEXT("Long", "Longtitude");
+	const FText Latititude = LOCTEXT("Lat", "Laititude");
+	const FText Altitude = LOCTEXT("Alt", "Altitude");
+	const FText Start = LOCTEXT("Teleport To Coordinates", "Teleport To Coordinates");
+
+	// Text constants Lower Box
+	const FText ListViewText = LOCTEXT("Search Airline", "Search Airline");
+	const FText EnterAirline = LOCTEXT("ICAO Code", "ICAO Code");
 
 	FSlateFontInfo ButtonTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
 	ButtonTextStyle.Size = 40.f;
@@ -56,56 +67,67 @@ void SSlateUI::Construct(const FArguments& InArgs)
 				[
 					SNew(SVerticalBox)
 						+ SVerticalBox::Slot()
+						.Padding(TeleportPadding)
 						[
-							SNew(STextBlock).Font(TitleTextStyle)
-								.Text(NSLOCTEXT("Ex", "key1", "Fuck you kid")).Justification(ETextJustify::Center)
-						]
-						+ SVerticalBox::Slot()
-						.Padding(ButtonPadding)
-						[
-							SAssignNew(LongCord, SEditableTextBox)
-								.Font(ButtonTextStyle)
-								.Text(Longtitude).Justification(ETextJustify::Center)
-
-						]
-						+ SVerticalBox::Slot()
-						.Padding(ButtonPadding)
-						[
-
-							SAssignNew(LatCord, SEditableTextBox).Font(ButtonTextStyle)
-								.Text(Latititude).Justification(ETextJustify::Center)
-
-						]
-						+ SVerticalBox::Slot()
-						.Padding(ButtonPadding)
-						[
-							SAssignNew(AltCord, SEditableTextBox).Font(ButtonTextStyle)
-								.Text(Altitude).Justification(ETextJustify::Center)
-
-						]
-						+ SVerticalBox::Slot()
-						.Padding(ButtonPadding)
-						[
-							SNew(SButton).OnClicked(this, &SSlateUI::getValues)
+							SNew(SVerticalBox)
+								+ SVerticalBox::Slot()
 								[
-									SNew(STextBlock).Font(ButtonTextStyle)
-										.Text(Start).Justification(ETextJustify::Center)
+									SNew(SHorizontalBox)
+										+ SHorizontalBox::Slot()
+										.Padding(ButtonPaddingInner)
+										[
+											SAssignNew(LongCord, SEditableTextBox)
+												.Font(ButtonTextStyle)
+												.Text(Longtitude).Justification(ETextJustify::Center)
+
+										]
+										+ SHorizontalBox::Slot()
+										.Padding(ButtonPaddingInner)
+										[
+
+											SAssignNew(LatCord, SEditableTextBox).Font(ButtonTextStyle)
+												.Text(Latititude).Justification(ETextJustify::Center)
+
+										]
+										+ SHorizontalBox::Slot()
+										.Padding(ButtonPaddingInner)
+										[
+											SAssignNew(AltCord, SEditableTextBox).Font(ButtonTextStyle)
+												.Text(Altitude).Justification(ETextJustify::Center)
+
+										]
 								]
-						]
-						+ SVerticalBox::Slot()
-						.Padding(ButtonPadding)
-						[
-							SAssignNew(ICAOCords, SEditableTextBox).Font(ButtonTextStyle)
-								.Text(EnterAirline).Justification(ETextJustify::Center)
+
+								+ SVerticalBox::Slot()
+								.Padding(ButtonPadding2)
+								[
+									SNew(SButton).OnClicked(this, &SSlateUI::getValues)
+										[
+											SNew(STextBlock).Font(ButtonTextStyle)
+												.Text(Start).Justification(ETextJustify::Center)
+										]
+								]
 
 						]
 						+ SVerticalBox::Slot()
-						.Padding(ButtonPadding)
-						[
-							SNew(SButton).OnClicked(this, &SSlateUI::SwitchToListView)
+						.Padding(ListPadding)
+						[	
+							SNew(SVerticalBox)
+							+SVerticalBox::Slot()
+								.Padding(ButtonPadding)
 								[
-									SNew(STextBlock).Font(ButtonTextStyle)
-									.Text(ListViewText).Justification(ETextJustify::Center)
+									SAssignNew(ICAOCords, SEditableTextBox).Font(ButtonTextStyle)
+									.Text(EnterAirline).Justification(ETextJustify::Center)
+
+								]
+								+ SVerticalBox::Slot()
+								.Padding(ButtonPadding)
+								[
+									SNew(SButton).OnClicked(this, &SSlateUI::SwitchToListView)
+										[
+											SNew(STextBlock).Font(ButtonTextStyle)
+											.Text(ListViewText).Justification(ETextJustify::Center)
+										]
 								]
 						]
 				]
@@ -116,6 +138,7 @@ void SSlateUI::Construct(const FArguments& InArgs)
 
 }
 
+
 float SSlateUI::stringConversion(TSharedPtr<SEditableTextBox> box)
 {
 	// Get Box text
@@ -123,32 +146,25 @@ float SSlateUI::stringConversion(TSharedPtr<SEditableTextBox> box)
 	// Convert to FString
 	FString MyFString = temp.ToString();
 	// Get cord in integer
-	float result = FCString::Atof(*MyFString);
+	double result = FCString::Atof(*MyFString);
 	return result;
 }
 
-//FMemory::Memcpy((void*)MyTCHARPtr, (void*)*MyFString, len * sizeof(TCHAR));
+
 FReply SSlateUI::getValues()
 {
-	float longta = stringConversion(LongCord);
-	float lata = stringConversion(LatCord);
-	float alta = stringConversion(AltCord);	
-	ViewModelInstance->viewCords.ExecuteIfBound(longta, lata, alta);
+	double longta = stringConversion(LongCord);
+	double lata = stringConversion(LatCord);
+	double alta = stringConversion(AltCord);
+	ViewModelInstance->viewCords.ExecuteIfBound(longta, lata, alta, 0);
 	return FReply::Handled();
 }
+
 
 FReply SSlateUI::SwitchToListView()
 {
 	FText temp = ICAOCords->GetText();
 	FString MyFString = temp.ToString();
-	/*
-	const char* code = (const char*)malloc(sizeof(char) * (MyFString.Len() + 1));
-	strcpy((char*) code, TCHAR_TO_UTF8(*MyFString));
-	UE_LOG(LogTemp, Log, TEXT("%s"), code);
-	UE_LOG(LogTemp, Log, TEXT("%s"), TCHAR_TO_ANSI(*MyFString));
-	UE_LOG(LogTemp, Log, TEXT("Converted String: %s"), ANSI_TO_TCHAR(code));
-	*/
-	//HUDPtr->OpenList(code);	
 	HUDPtr->OpenList(TCHAR_TO_UTF8(*MyFString));
 	return FReply::Handled();
 }
@@ -156,3 +172,26 @@ FReply SSlateUI::SwitchToListView()
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
 
+/*						+ SVerticalBox::Slot()
+								.Padding(ButtonPadding)
+								[
+									SAssignNew(LongCord, SEditableTextBox)
+										.Font(ButtonTextStyle)
+										.Text(Longtitude).Justification(ETextJustify::Center)
+
+								]
+								+ SVerticalBox::Slot()
+								.Padding(ButtonPadding)
+								[
+
+									SAssignNew(LatCord, SEditableTextBox).Font(ButtonTextStyle)
+										.Text(Latititude).Justification(ETextJustify::Center)
+
+								]
+								+ SVerticalBox::Slot()
+								.Padding(ButtonPadding)
+								[
+									SAssignNew(AltCord, SEditableTextBox).Font(ButtonTextStyle)
+										.Text(Altitude).Justification(ETextJustify::Center)
+
+								]*/

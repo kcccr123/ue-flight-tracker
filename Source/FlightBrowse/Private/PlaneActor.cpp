@@ -2,6 +2,7 @@
 
 
 #include "PlaneActor.h"
+#include "CesiumGlobeAnchorComponent.h"
 
 // Sets default values
 APlaneActor::APlaneActor()
@@ -9,6 +10,8 @@ APlaneActor::APlaneActor()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	// Cesium component to keep model rotation relative to globe
+	CesiumGlobeAnchor = CreateDefaultSubobject<UCesiumGlobeAnchorComponent>(TEXT("CesiumGlobeAnchor"));
 
 	// Set plane mesh
 	PlaneMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlaneMeshComponent"));
@@ -20,6 +23,7 @@ APlaneActor::APlaneActor()
 		UE_LOG(LogTemp, Log, TEXT("Spawned Plane"));
 		PlaneMeshComponent->SetStaticMesh(MeshAsset.Object);
 	}
+
 }
 
 // Called when the game starts or when spawned

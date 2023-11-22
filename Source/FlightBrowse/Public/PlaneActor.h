@@ -3,7 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CesiumGlobeAnchorComponent.h"
 #include "GameFramework/Actor.h"
+#include "CesiumGeospatial/Ellipsoid.h"
+#include "CesiumGeospatial/Cartographic.h"
 #include "PlaneActor.generated.h"
 
 UCLASS()
@@ -18,6 +21,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	UStaticMeshComponent* PlaneMeshComponent;
+	UCesiumGlobeAnchorComponent* CesiumGlobeAnchor;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

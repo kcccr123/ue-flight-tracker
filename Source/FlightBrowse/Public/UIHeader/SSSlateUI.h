@@ -41,7 +41,10 @@ protected:
 
 	virtual bool SupportsKeyboardFocus() const override { return true; };
 public:
+	// Teleport to specified location
 	FReply getValues();
+
+	//Switch to view list of airlines (main logic)
 	FReply SwitchToListView();
 
 };
