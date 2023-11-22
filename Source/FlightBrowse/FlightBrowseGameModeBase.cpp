@@ -2,14 +2,6 @@
 
 
 #include "FlightBrowseGameModeBase.h"
-#include "MyHUD.h"
-#include "MenuPlayerController.h"
-#include "CesiumGeoreference.h"
-#include "MyGlobeAwareDefaultPawn.h"
-#include "viewModelCesium.h"
-#include "api/SQLiteConverter.h"
-#include "api/Airline.h"
-#include "Engine/Engine.h"
 
 void AFlightBrowseGameModeBase::StartPlay()
 {

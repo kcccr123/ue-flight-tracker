@@ -9,9 +9,6 @@ import time
 #sqlite setup
 
 cnx = sqlite3.connect('test.db')
-if cnx:
-    unreal.log("connected")
-
 e = create_engine('sqlite://')
 
 #flight radar config
@@ -37,9 +34,7 @@ def get_data():
                             flight.altitude,
                             flight.heading]
         
-    #print(df.iloc[25])
-    unreal.log("attempting pushing to db")
+    print(df.iloc[25])
     df.to_sql(name='flight_data', con=cnx, if_exists='replace')
-
     print("Retrieved Data")
 
