@@ -38,10 +38,3 @@ def get_data():
     df.to_sql(name='flight_data', con=cnx, if_exists='replace')
     print("Retrieved Data")
 
-
-#schedule.every(30).seconds.do(get_data)
-
-
-#while True:
-#    schedule.run_pending()
-#    time.sleep(1)
