@@ -9,6 +9,9 @@ import time
 #sqlite setup
 
 cnx = sqlite3.connect('test.db')
+if cnx:
+    unreal.log("connected")
+
 e = create_engine('sqlite://')
 
 #flight radar config
@@ -19,7 +22,7 @@ fr_api.set_flight_tracker_config(flight_tracker)
 
 
 def get_data():
-
+    unreal.log("running get_data func")
 
     #flight radar dataframe, reset it to empty
     df = pd.DataFrame(columns=['origin', 'destination', 'callsign', 'airline','lat', 'lng', 'atd', 'heading']) 
@@ -36,10 +39,14 @@ def get_data():
                             flight.altitude,
                             flight.heading]
         
-    print(df.iloc[25])
+    #print(df.iloc[25])
+    unreal.log("attempting pushing to db")
     df.to_sql(name='flight_data', con=cnx, if_exists='replace')
+    unreal.log("pushed to db")
+
+    unreal.log("finished get_data")
         
-schedule.every(30).seconds.do(get_data)
+schedule.every(5).seconds.do(get_data)
 
 
 while True:
