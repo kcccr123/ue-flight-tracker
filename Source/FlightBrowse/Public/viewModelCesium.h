@@ -6,6 +6,8 @@
 #include "Delegates/DelegateCombinations.h"
 #include "MenuPlayerController.h"
 #include "../api/SQLiteConverter.h"
+#include "../api/Airline.h"
+#include "../api/SQLiteConverter.h"
 #include "SQLiteDatabase.h"
 #include "viewModelCesium.generated.h"
 

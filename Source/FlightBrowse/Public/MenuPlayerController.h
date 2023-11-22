@@ -8,7 +8,6 @@
 #include "PlaneActor.h"
 #include "MenuPlayerController.generated.h"
 
-
 /**
  *
  */

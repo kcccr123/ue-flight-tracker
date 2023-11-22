@@ -19,8 +19,6 @@ fr_api.set_flight_tracker_config(flight_tracker)
 
 
 def get_data():
-
-
     #flight radar dataframe, reset it to empty
     df = pd.DataFrame(columns=['origin', 'destination', 'callsign', 'airline','lat', 'lng', 'atd', 'heading']) 
 
@@ -38,10 +36,12 @@ def get_data():
         
     print(df.iloc[25])
     df.to_sql(name='flight_data', con=cnx, if_exists='replace')
-        
-schedule.every(30).seconds.do(get_data)
+    print("Retrieved Data")
 
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+#schedule.every(30).seconds.do(get_data)
+
+
+#while True:
+#    schedule.run_pending()
+#    time.sleep(1)

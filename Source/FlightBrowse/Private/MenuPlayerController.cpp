@@ -1,11 +1,12 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "CesiumGeoreference.h"
 
 #include "MenuPlayerController.h"
+#include "CesiumGeoreference.h"
+#include "CesiumGeoreference.h"
 #include "MyGlobeAwareDefaultPawn.h"
-#include "PlaneActor.h"
 #include "MyHUD.h"
+#include "PlaneActor.h"
 
 AMenuPlayerController::AMenuPlayerController()
 {
