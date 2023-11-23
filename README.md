@@ -40,9 +40,9 @@
 ## About The Project
 This project uses the Flight Radar API and Cesium to create a view from the perspective of the airplanes that are currently in flight. Use the simple UI to see active flights and view their position on earth.
 
-![pic1](./images/Screenshot (191).png)
-![pic2](./images/Screenshot (192).png)
-![pic3](./images/Screenshot (195).png)
+![pic1](./images/Screenshot(191).png)
+![pic2](./images/Screenshot(192).png)
+![pic3](./images/Screenshot(195).png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
