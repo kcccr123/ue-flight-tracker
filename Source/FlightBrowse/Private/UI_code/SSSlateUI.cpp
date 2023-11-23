@@ -26,8 +26,8 @@ void SSlateUI::Construct(const FArguments& InArgs)
 
 	// Upper Box Margins
 	const FMargin TeleportPadding = FMargin(200.f, 50.f);
-	const FMargin ButtonPaddingInner = FMargin(10.f, 10.f);
-	const FMargin ButtonPadding2 = FMargin(10.f, 10.f);
+	const FMargin ButtonPaddingInner = FMargin(5.f, 10.f);
+	const FMargin ButtonPadding2 = FMargin(5.f, 10.f);
 
 	// Lower Box Margins
 	const FMargin ListPadding = FMargin(200.f, 50.f);
@@ -44,10 +44,7 @@ void SSlateUI::Construct(const FArguments& InArgs)
 	const FText EnterAirline = LOCTEXT("ICAO Code", "ICAO Code");
 
 	FSlateFontInfo ButtonTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
-	ButtonTextStyle.Size = 40.f;
-	FSlateFontInfo TitleTextStyle = ButtonTextStyle;
-	;
-	TitleTextStyle.Size = 60.f;
+	ButtonTextStyle.Size = 20.f;
 
 
 	ChildSlot
