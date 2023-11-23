@@ -15,7 +15,7 @@ void SFlightListView::Construct(const FArguments& InArgs)
 	const FMargin ContentPadding = FMargin(200.f, 30.f);
 	const FMargin ButtonPadding = FMargin(10.f);
 	FSlateFontInfo ButtonTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
-	ButtonTextStyle.Size = 20.f;
+	ButtonTextStyle.Size = 2.f;
 
 	//Referance to HUD
 	HUDPtr = InArgs._HUDPtr;
@@ -62,7 +62,7 @@ FReply SFlightListView::getValues(double lata, double longta, double alta, int32
 TSharedRef<ITableRow> SFlightListView::GenerateRow(TSharedPtr<Flight> Item, const TSharedRef<STableViewBase>& OwnerTable)
 {
 	FSlateFontInfo ButtonTextStyle = FCoreStyle::Get().GetFontStyle("EmbossedText");
-	ButtonTextStyle.Size = 40.f;
+	ButtonTextStyle.Size = 20.f;
 	FSlateFontInfo TitleTextStyle = ButtonTextStyle;
 	;
 	TitleTextStyle.Size = 60.f;
@@ -78,7 +78,7 @@ TSharedRef<ITableRow> SFlightListView::GenerateRow(TSharedPtr<Flight> Item, cons
 							*Item->getCallsign(), Item->getLatitude(), Item->getLongitude(), Item->getAltitude())))
 						.Font(ButtonTextStyle)
 						.Justification(ETextJustify::Center)
-						.Font(ButtonTextStyle)
+						
 				]
 		];
 }
