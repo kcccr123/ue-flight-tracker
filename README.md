@@ -11,7 +11,7 @@
 <h3 align="center">UE Flight Tracker</h3>
 
   <p align="center">
-    A live flight viewer simulating a 3d perspective from plane view
+    An app for simulating positions of aircraft across the globe in flight
     <br />
 
 
