@@ -79,11 +79,11 @@ Press F to interact with the Menu. WASD, C and SPACEBAR to move the camera.
 
 <!-- CONTACT -->
 ## Contact
+Feel free to contact us at:
 
-
-@JoshuaLuo - feel free to contact me at jla818@sfu.ca\
-@keb\
-@jer
+@Joshua Luo - jla818@sfu.ca\
+@Kevin Chen - kevinz.chen@mail.utoronto.ca\
+@Jerry Chen
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
