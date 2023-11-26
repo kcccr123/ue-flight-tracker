@@ -69,7 +69,7 @@ Run the executeable on your local machine! The executable and related dependenci
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-Press F to interact with the Menu. WASD, C and SPACEBAR to move the camera./
+Press F to interact with the Menu. WASD, C and SPACEBAR to move the camera.
 There are two ways to interact with the program. You can enter in the long/lat coords, or choose from our live database.
 
 ![gif1](./images/Animation.gif)
