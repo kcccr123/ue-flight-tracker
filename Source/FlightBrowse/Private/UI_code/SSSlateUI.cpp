@@ -22,16 +22,20 @@ void SSlateUI::Construct(const FArguments& InArgs)
 	ViewModelInstance = InArgs._instance;
 
 	// View Margin
-	const FMargin ContentPadding = FMargin(300.f, 200.f);
+	const FMargin ContentPadding = FMargin(300.f, 150.f, 300.f, 10.f);
 
 	// Upper Box Margins
-	const FMargin TeleportPadding = FMargin(200.f, 50.f);
-	const FMargin ButtonPaddingInner = FMargin(5.f, 10.f);
+	const FMargin TeleportPadding = FMargin(200.f, 10.f);
+	const FMargin ButtonPaddingInner = FMargin(5.f, 8.f);
 	const FMargin ButtonPadding2 = FMargin(5.f, 10.f);
 
 	// Lower Box Margins
-	const FMargin ListPadding = FMargin(200.f, 50.f);
-	const FMargin ButtonPadding = FMargin(300.f, 10.f);
+	const FMargin ListPadding = FMargin(200.f, 5.f);
+	const FMargin ButtonPadding = FMargin(300.f, 5.f);
+
+	// Exit Box
+	const FMargin ExitButton = FMargin(500.0f, 50.0f, 500.0f, 400.0f);
+	const FText ExitText = LOCTEXT("Quit To Desktop", "Quit To Desktop");
 
 	// Text constants Upper Box
 	const FText Longtitude = LOCTEXT("Long", "Longtitude");
@@ -117,7 +121,7 @@ void SSlateUI::Construct(const FArguments& InArgs)
 									.Text(EnterAirline).Justification(ETextJustify::Center)
 
 								]
-								+ SVerticalBox::Slot()
+								+ SVerticalBox::Slot()	
 								.Padding(ButtonPadding)
 								[
 									SNew(SButton).OnClicked(this, &SSlateUI::SwitchToListView)
@@ -125,6 +129,18 @@ void SSlateUI::Construct(const FArguments& InArgs)
 											SNew(STextBlock).Font(ButtonTextStyle)
 											.Text(ListViewText).Justification(ETextJustify::Center)
 										]
+								]
+						
+						]
+						+ SVerticalBox::Slot()
+						.Padding(ExitButton)
+						[
+							SNew(SButton).OnClicked(this, &SSlateUI::ExitProject)
+								.HAlign(HAlign_Center)
+								.VAlign(VAlign_Center)
+								[
+									SNew(STextBlock).Font(ButtonTextStyle)
+										.Text(ExitText).Justification(ETextJustify::Center)
 								]
 						]
 				]
@@ -145,6 +161,12 @@ float SSlateUI::stringConversion(TSharedPtr<SEditableTextBox> box)
 	// Get cord in integer
 	double result = FCString::Atof(*MyFString);
 	return result;
+}
+
+FReply SSlateUI::ExitProject()
+{
+	HUDPtr->QuitProject();
+	return FReply::Handled();
 }
 
 
@@ -168,27 +190,3 @@ FReply SSlateUI::SwitchToListView()
 
 END_SLATE_FUNCTION_BUILD_OPTIMIZATION
 
-
-/*						+ SVerticalBox::Slot()
-								.Padding(ButtonPadding)
-								[
-									SAssignNew(LongCord, SEditableTextBox)
-										.Font(ButtonTextStyle)
-										.Text(Longtitude).Justification(ETextJustify::Center)
-
-								]
-								+ SVerticalBox::Slot()
-								.Padding(ButtonPadding)
-								[
-
-									SAssignNew(LatCord, SEditableTextBox).Font(ButtonTextStyle)
-										.Text(Latititude).Justification(ETextJustify::Center)
-
-								]
-								+ SVerticalBox::Slot()
-								.Padding(ButtonPadding)
-								[
-									SAssignNew(AltCord, SEditableTextBox).Font(ButtonTextStyle)
-										.Text(Altitude).Justification(ETextJustify::Center)
-
-								]*/

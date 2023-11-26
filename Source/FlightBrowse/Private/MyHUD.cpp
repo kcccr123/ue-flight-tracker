@@ -29,6 +29,11 @@ void AMyHUD::BeginPlay() {
 }
 
 
+void AMyHUD::QuitProject()
+{
+    FGenericPlatformMisc::RequestExit(false);
+}
+
 void AMyHUD::ShowMenu()
 {
     if (GEngine && GEngine->GameViewport) {

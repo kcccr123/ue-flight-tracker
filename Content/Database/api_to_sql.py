@@ -2,15 +2,16 @@ import pandas as pd
 import sqlite3
 from sqlalchemy import create_engine
 from FlightRadar24 import FlightRadar24API
-import schedule
-import time
 
+import os
+
+print("Current working directory:", os.getcwd())
 
 #sqlite setup
-
 cnx = sqlite3.connect('test.db')
-e = create_engine('sqlite://')
 
+
+e = create_engine('sqlite://')
 #flight radar config
 fr_api = FlightRadar24API()
 flight_tracker = fr_api.get_flight_tracker_config()
@@ -36,5 +37,5 @@ def get_data():
         
     print(df.iloc[25])
     df.to_sql(name='flight_data', con=cnx, if_exists='replace')
-    print("Retrieved Data")
 
+get_data()

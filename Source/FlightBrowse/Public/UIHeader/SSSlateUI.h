@@ -39,6 +39,8 @@ protected:
 	//Factory Class
 	TWeakObjectPtr<class AMyHUD> HUDPtr;
 
+	FReply ExitProject();
+
 	virtual bool SupportsKeyboardFocus() const override { return true; };
 public:
 	// Teleport to specified location

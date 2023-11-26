@@ -25,6 +25,7 @@ protected:
 
 public:
 	bool isOpen;
+	void QuitProject();
 	void ShowMenu();
 	void CloseMenu();
 	void OpenList(const char *);

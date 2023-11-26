@@ -9,6 +9,9 @@ void AFlightBrowseGameModeBase::StartPlay()
     check(GEngine != nullptr);
     GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Running"));
     UE_LOG(LogTemp, Log, TEXT("GameMode Runs"));
+
+    // Run Python
+
 }
 
 void AFlightBrowseGameModeBase::InitGameState()
