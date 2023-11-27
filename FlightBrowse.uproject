@@ -55,10 +55,6 @@
 		{
 			"Name": "SQLiteSupport",
 			"Enabled": true
-		},
-		{
-			"Name": "PythonAutomationTest",
-			"Enabled": true
 		}
 	]
 }

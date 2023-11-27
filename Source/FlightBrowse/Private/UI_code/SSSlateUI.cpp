@@ -22,19 +22,19 @@ void SSlateUI::Construct(const FArguments& InArgs)
 	ViewModelInstance = InArgs._instance;
 
 	// View Margin
-	const FMargin ContentPadding = FMargin(300.f, 150.f, 300.f, 10.f);
+	const FMargin ContentPadding = FMargin(300.f, 80.f, 300.f, 5.f);
 
 	// Upper Box Margins
-	const FMargin TeleportPadding = FMargin(200.f, 10.f);
-	const FMargin ButtonPaddingInner = FMargin(5.f, 8.f);
+	const FMargin TeleportPadding = FMargin(200.f, 50.f);
+	const FMargin ButtonPaddingInner = FMargin(5.f, 5.f);
 	const FMargin ButtonPadding2 = FMargin(5.f, 10.f);
 
 	// Lower Box Margins
-	const FMargin ListPadding = FMargin(200.f, 5.f);
-	const FMargin ButtonPadding = FMargin(300.f, 5.f);
+	const FMargin ListPadding = FMargin(200.f, 50.f);
+	const FMargin ButtonPadding = FMargin(300.f, 10.f);
 
 	// Exit Box
-	const FMargin ExitButton = FMargin(500.0f, 50.0f, 500.0f, 400.0f);
+	const FMargin ExitButton = FMargin(500.0f, 50.0f, 500.0f, 250.0f);
 	const FText ExitText = LOCTEXT("Quit To Desktop", "Quit To Desktop");
 
 	// Text constants Upper Box
@@ -165,6 +165,7 @@ float SSlateUI::stringConversion(TSharedPtr<SEditableTextBox> box)
 
 FReply SSlateUI::ExitProject()
 {
+	//Quits Project
 	HUDPtr->QuitProject();
 	return FReply::Handled();
 }
@@ -172,6 +173,7 @@ FReply SSlateUI::ExitProject()
 
 FReply SSlateUI::getValues()
 {
+	//Gets Values for teleportation
 	double longta = stringConversion(LongCord);
 	double lata = stringConversion(LatCord);
 	double alta = stringConversion(AltCord);
@@ -182,6 +184,7 @@ FReply SSlateUI::getValues()
 
 FReply SSlateUI::SwitchToListView()
 {
+	//Switches to list view, generates airline according to user inputed ICAO code.
 	FText temp = ICAOCords->GetText();
 	FString MyFString = temp.ToString();
 	HUDPtr->OpenList(TCHAR_TO_UTF8(*MyFString));
