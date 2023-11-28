@@ -28,6 +28,9 @@
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+      </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -66,6 +69,14 @@ This project uses the Flight Radar API and Cesium to get a list of commerical fl
 Run the executeable on your local machine! The executable and related dependencies are on a google drive because they are too big for github.
 https://drive.google.com/file/d/1h9Bx-AVxqdDTafehtBKragmWHrkEOzId/view?usp=drive_link
 
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- USAGE EXAMPLES -->
