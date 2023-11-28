@@ -71,7 +71,7 @@ Run the executeable on your local machine! The executable and related dependenci
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+You will need to install these python dependencies
 * pip
   ```sh
   pip install FlightRadarAPI
