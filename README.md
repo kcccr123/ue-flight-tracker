@@ -72,10 +72,20 @@ Run the executeable on your local machine! The executable and related dependenci
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
-* npm
+* pip
   ```sh
-  npm install npm@latest -g
+  pip install FlightRadarAPI
   ```
+  ```sh
+  pip install pandas
+  ```
+  ```sh
+  pip install sqlalchemy
+  ```
+  ```sh
+  pip install sqlite3
+  ```
+  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
