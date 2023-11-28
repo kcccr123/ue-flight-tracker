@@ -67,7 +67,7 @@ This project uses the Flight Radar API and Cesium to get a list of commerical fl
 ## Getting Started
 
 Run the executeable on your local machine! The executable and related dependencies are on a google drive because they are too big for github.
-https://drive.google.com/file/d/1h9Bx-AVxqdDTafehtBKragmWHrkEOzId/view?usp=drive_link
+[https://drive.google.com/file/d/1h9Bx-AVxqdDTafehtBKragmWHrkEOzId/view?usp=drive_link](https://drive.google.com/file/d/1w_CoKEwNK_weQQN3VnP6MvNODK52QkoQ/view?usp=sharing)
 
 ### Prerequisites
 
