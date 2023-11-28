@@ -71,7 +71,7 @@ https://drive.google.com/file/d/1h9Bx-AVxqdDTafehtBKragmWHrkEOzId/view?usp=drive
 <!-- USAGE EXAMPLES -->
 ## Usage
 Press F to interact with the Menu. WASD, C and SPACEBAR to move the camera.
-There are two ways to interact with the program. You can enter in the long/lat coords, or choose from our live database.
+There are two ways to interact with the program. You can enter in the long/lat coords, or choose from a database that is updated on application launch.
 
 ![gif1](./images/Animation.gif)
 ![gif2](./images/Animation2.gif)
