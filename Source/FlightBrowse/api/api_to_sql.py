@@ -2,8 +2,7 @@ import pandas as pd
 import sqlite3
 from sqlalchemy import create_engine
 from FlightRadar24 import FlightRadar24API
-import schedule
-import time
+
 
 
 #sqlite setup
