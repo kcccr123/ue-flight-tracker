@@ -92,7 +92,7 @@ You will need to install these python dependencies
 <!-- USAGE EXAMPLES -->
 ## Usage
 Press F to interact with the Menu. WASD, C and SPACEBAR to move the camera.
-There are two ways to interact with the program. You can enter in the long/lat coords, or choose from a database that is updated on application launch.
+There are two ways to interact with the program. You can enter in the long/lat coords, or choose from a database that is updated on application launch using an Airlines ICAO code.
 
 ![gif1](./images/Animation.gif)
 ![gif2](./images/Animation2.gif)
