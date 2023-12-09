@@ -107,7 +107,7 @@ Feel free to contact us at:
 
 @Joshua Luo - jla818@sfu.ca\
 @Kevin Chen - kevinz.chen@mail.utoronto.ca\
-@Jerry Chen
+@Jerry Chen - jca476@sfu.ca\
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
