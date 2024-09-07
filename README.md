@@ -47,8 +47,6 @@ This project uses the Flight Radar API and Cesium to get a list of commerical fl
 ![pic2](./images/Screenshot(192).png)
 ![pic3](./images/Screenshot(195).png)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 ### Built With
